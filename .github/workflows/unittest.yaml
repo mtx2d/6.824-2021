@@ -1,0 +1,117 @@
+name: Unittest
+on: [push]
+
+jobs:
+  test-2A:
+    strategy:
+      matrix:
+        go-version: ["1.13.8"]
+        os: [ubuntu-latest, macos-latest, windows-latest] 
+    runs-on: ${{matrix.os}}
+
+    steps: 
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{matrix.go-version}}
+      
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Test2A
+        run: go test -run 2A -race
+        working-directory: src/raft
+
+  test-2B:
+    strategy:
+      matrix:
+        go-version: ["1.13.8"]
+        os: [ubuntu-latest, macos-latest, windows-latest] 
+    runs-on: ${{matrix.os}}
+
+    steps: 
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{matrix.go-version}}
+      
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: TestBasicAgree2B
+        run: go test -run TestBasicAgree2B -race
+        working-directory: src/raft
+
+      - name: TestRPCBytes2B
+        run: go test -run TestRPCBytes2B -race
+        working-directory: src/raft
+
+      - name: TestFailAgree2B
+        run: go test -run TestFailAgree2B -race
+        working-directory: src/raft
+
+      - name: TestFailNoAgree2B
+        run: go test -run TestFailNoAgree2B -race
+        working-directory: src/raft
+
+      - name: TestConcurrentStarts2B
+        run: go test -run TestConcurrentStarts2B -race
+        working-directory: src/raft
+
+      - name: TestRejoin2B
+        run: go test -run TestRejoin2B -race
+        working-directory: src/raft
+
+      - name: TestBackup2B
+        run: go test -run TestBackup2B -race
+        working-directory: src/raft
+
+      - name: TestCount2B
+        run: go test -run TestCount2B -race
+        working-directory: src/raft
+
+  test-2C:
+    strategy:
+      matrix:
+        go-version: ["1.13.8"]
+        os: [ubuntu-latest, macos-latest, windows-latest] 
+    runs-on: ${{matrix.os}}
+
+    steps: 
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ${{matrix.go-version}}
+      
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: TestPersist12C
+        run: go test -run TestPersist12C -race
+        working-directory: src/raft
+
+      - name: TestPersist22C
+        run: go test -run TestPersist22C -race
+        working-directory: src/raft
+
+      - name: TestPersist32C
+        run: go test -run TestPersist32C -race
+        working-directory: src/raft
+
+      - name: TestFigure82C
+        run: go test -run TestFigure82C -race
+        working-directory: src/raft
+
+      - name: TestUnreliableAgree2C
+        run: go test -run TestUnreliableAgree2C -race
+        working-directory: src/raft
+
+      - name: TestFigure8Unreliable2C
+        run: go test -run TestFigure8Unreliable2C -race
+        working-directory: src/raft
+
+      - name: TestReliableChurn2C
+        run: go test -run TestReliableChurn2C -race
+        working-directory: src/raft
+
+      - name: TestUnreliableChurn2C
+        run: go test -run TestUnreliableChurn2C -race
+        working-directory: src/raft
